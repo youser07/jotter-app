@@ -1,0 +1,50 @@
+/* Default styles for the note */
+.note {
+    background: #fff;
+    border-radius: 7px;
+    box-shadow: 0 2px 5px #ccc;
+    padding: 10px;
+    width: 240px;
+    margin: 16px;
+    float: left;
+    color: #000;
+    overflow: hidden; /* Ensure content doesn't overflow the container */
+  }
+  
+  /* Title size adjustments */
+  .note h1 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    white-space: normal; /* Allow the title to wrap instead of truncating */
+    word-break: break-word; /* Prevent word splitting in the title */
+    text-align: center; /* Optional: center the title */
+  }
+  
+  /* Body text adjustments */
+  .note p {
+    font-size: 1em;
+    margin-top: 5px;
+    white-space: normal; /* Ensure text wraps properly */
+    word-break: break-word; /* Prevent word splitting in body text */
+    overflow: hidden; /* Prevent overflow of the text */
+  }
+  
+  /* Dark mode styles */
+  .note.darkMode {
+    background: #fff;
+    color: #000;
+  }
+  
+  .deleteButton {
+    color: #f5ba13;
+  }
+  
+  .note.darkMode .deleteButton {
+    color: #f5ba13;
+  }
+  
+  .note h1,
+  .note p {
+    color: inherit;
+  }
+  

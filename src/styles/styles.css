@@ -101,21 +101,10 @@ form.create-note button {
   cursor: pointer;
   outline: none;
 }
-.note {
-  background: #fff; /* Default background */
-  border-radius: 7px;
-  box-shadow: 0 2px 5px #ccc;
-  padding: 10px;
-  width: 240px;
-  margin: 16px;
-  float: left;
-  color: #000; /* Default text color */
-}
 
-.note.dark-mode {
-  background: #333; /* Dark background for dark mode */
-  color: #fff; /* White text for dark mode */
-}
+
+
+
 
 .note h1,
 .note p {

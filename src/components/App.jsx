@@ -12,15 +12,13 @@ function App() {
 
   function addNote(newNote) {
     setNotes((prevNotes) => {
-      return [...prevNotes, newNote];
+      return [...prevNotes, { ...newNote, id: Date.now() }];
     });
   }
 
   function deleteNote(id) {
     setNotes((prevNotes) => {
-      return prevNotes.filter((_, index) => {
-        return index !== id;
-      });
+      return prevNotes.filter((note) => note.id !== id);
     });
   }
 
@@ -43,14 +41,15 @@ function App() {
         <Header />
         <ThemeToggle darkMode={darkMode} toggleTheme={toggleTheme} /> {/* Add theme toggle */}
         <CreateArea onAdd={addNote} />
-        {notes.map((noteItem, index) => {
+        {notes.map((noteItem) => {
           return (
             <Note
-              key={index}
-              id={index}
+              key={noteItem.id} // Use the note's id instead of index
+              id={noteItem.id} // Use the unique id from the note
               title={noteItem.title}
               content={noteItem.content}
               onDelete={deleteNote}
+              darkMode={darkMode} // Pass darkMode state here
             />
           );
         })}
