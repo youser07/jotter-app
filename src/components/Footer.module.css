@@ -1,0 +1,12 @@
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    color: #333;               /* Dark text color */
+    text-align: center;        /* Center the text */
+    padding: 15px 0;           /* Space around the text */
+    font-size: 14px;           /* Elegant text size */
+    z-index: 1000;             /* Keeps the footer on top */
+  }
+  

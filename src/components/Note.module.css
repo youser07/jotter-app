@@ -1,50 +1,106 @@
 /* Default styles for the note */
 .note {
-    background: #fff;
-    border-radius: 7px;
-    box-shadow: 0 2px 5px #ccc;
-    padding: 10px;
-    width: 240px;
-    margin: 16px;
-    float: left;
-    color: #000;
-    overflow: hidden; /* Ensure content doesn't overflow the container */
+  background: #fff;
+  border-radius: 7px;
+  box-shadow: 0 2px 5px #ccc;
+  padding: 10px;
+  width: 240px;
+  margin: 16px;
+  float: left;
+  color: #000;
+  overflow: hidden; /* Ensure content doesn't overflow the container */
+  position: relative; /* To position the buttons */
+  padding-bottom: 50px; /* Make space at the bottom for buttons */
+}
+
+/* Title size adjustments */
+.note h1 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  white-space: normal; /* Allow the title to wrap instead of truncating */
+  word-break: break-word; /* Prevent word splitting in the title */
+  text-align: center; /* Optional: center the title */
+}
+
+/* Body text adjustments */
+.note p {
+  font-size: 1em;
+  margin-top: 5px;
+  white-space: normal; /* Ensure text wraps properly */
+  word-break: break-word; /* Prevent word splitting in body text */
+  overflow: hidden; /* Prevent overflow of the text */
+}
+
+/* Remove button outlines and borders */
+button:focus {
+  outline: none; /* Removes the default focus outline */
+  border: none; /* Remove default border */
+}
+
+/* Edit Button styles (same size as delete button) */
+.editButton {
+  position: absolute;
+  bottom: 10px; /* Align it to the bottom of the note */
+  left: 10px; /* Position on the left side */
+  background: #f5ba13;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 36px; /* Same size as delete button */
+  height: 36px; /* Same size as delete button */
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Zoom In effect when hovering */
+.editButton:hover {
+  background-color: #e4a10d;
+  transform: scale(1.2); /* Zoom in effect */
+}
+
+/* Delete Button styles */
+.deleteButton {
+  position: absolute;
+  bottom: 10px; /* Align it to the bottom of the note */
+  right: 10px; /* Position on the right side */
+  color: #f5ba13;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease-in-out;
+  width: 36px; /* Ensure the same size as the edit button */
+  height: 36px; /* Ensure the same size as the edit button */
+}
+
+/* Shaking effect on hover */
+.deleteButton:hover {
+  animation: shake 0.3s ease-in-out;
+  animation-iteration-count: 1;
+}
+
+/* Shaking animation */
+@keyframes shake {
+  0% {
+    transform: translateX(0);
   }
-  
-  /* Title size adjustments */
-  .note h1 {
-    font-size: 1.2em;
-    margin-bottom: 10px;
-    white-space: normal; /* Allow the title to wrap instead of truncating */
-    word-break: break-word; /* Prevent word splitting in the title */
-    text-align: center; /* Optional: center the title */
+  25% {
+    transform: translateX(-4px);
   }
-  
-  /* Body text adjustments */
-  .note p {
-    font-size: 1em;
-    margin-top: 5px;
-    white-space: normal; /* Ensure text wraps properly */
-    word-break: break-word; /* Prevent word splitting in body text */
-    overflow: hidden; /* Prevent overflow of the text */
+  50% {
+    transform: translateX(4px);
   }
-  
-  /* Dark mode styles */
-  .note.darkMode {
-    background: #fff;
-    color: #000;
+  75% {
+    transform: translateX(-4px);
   }
-  
-  .deleteButton {
-    color: #f5ba13;
+  100% {
+    transform: translateX(0);
   }
-  
-  .note.darkMode .deleteButton {
-    color: #f5ba13;
-  }
-  
-  .note h1,
-  .note p {
-    color: inherit;
-  }
-  
+}

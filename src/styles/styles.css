@@ -110,3 +110,11 @@ form.create-note button {
 .note p {
   color: inherit; /* Inherit text color from parent */
 }
+/* Global Styles for Background Blur */
+body {
+  transition: filter 0.3s ease-out;
+}
+
+body.blurBackground {
+  filter: blur(5px); /* Apply a blur effect to the background when a note is in edit mode */
+}
