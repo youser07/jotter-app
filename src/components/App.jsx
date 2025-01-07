@@ -4,11 +4,15 @@ import Footer from "./Footer";
 import Note from "./Note";
 import CreateArea from "./CreateArea";
 import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
-import ThemeToggle from "./ThemeToggle"; // Import the theme toggle component
+import ThemeToggle from "./ThemeToggle";
+import ModalEditNote from "./ModalEditNote"; // Import the new ModalEditNote component
 
 function App() {
   const [notes, setNotes] = useState([]);
-  const [darkMode, setDarkMode] = useState(false); // Manage dark mode state
+  const [darkMode, setDarkMode] = useState(false);
+
+  const [editingNote, setEditingNote] = useState(null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   function addNote(newNote) {
     setNotes((prevNotes) => {
@@ -22,38 +26,50 @@ function App() {
     });
   }
 
-  // Toggle theme function
+  function handleEdit(id) {
+    const noteToEdit = notes.find((note) => note.id === id);
+    setEditingNote(noteToEdit);
+    setIsEditModalOpen(true);
+  }
+
   const toggleTheme = () => {
     setDarkMode(!darkMode);
   };
 
-  // Create a theme based on the darkMode state
   const theme = createTheme({
     palette: {
-      mode: darkMode ? "dark" : "light", // Switch between dark and light mode
+      mode: darkMode ? "dark" : "light",
     },
   });
 
   return (
-    <ThemeProvider theme={theme}> {/* Apply the theme globally */}
-      <CssBaseline /> {/* Normalize styles across browsers */}
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
       <div>
         <Header />
-        <ThemeToggle darkMode={darkMode} toggleTheme={toggleTheme} /> {/* Add theme toggle */}
+        <ThemeToggle darkMode={darkMode} toggleTheme={toggleTheme} />
         <CreateArea onAdd={addNote} />
         {notes.map((noteItem) => {
           return (
             <Note
-              key={noteItem.id} // Use the note's id instead of index
-              id={noteItem.id} // Use the unique id from the note
+              key={noteItem.id}
+              id={noteItem.id}
               title={noteItem.title}
               content={noteItem.content}
               onDelete={deleteNote}
-              darkMode={darkMode} // Pass darkMode state here
+              onEdit={handleEdit}
+              darkMode={darkMode}
             />
           );
         })}
         <Footer />
+        {/* Use the ModalEditNote component here */}
+        <ModalEditNote
+          isEditModalOpen={isEditModalOpen}
+          setIsEditModalOpen={setIsEditModalOpen}
+          editingNote={editingNote}
+          setEditingNote={setEditingNote}
+        />
       </div>
     </ThemeProvider>
   );
