@@ -7,7 +7,6 @@ import styles from "./CreateArea.module.css";
 function CreateArea(props) {
   const [isExpanded, setExpanded] = useState(false);
   const [note, setNote] = useState({ title: "", content: "" });
-  const [height, setHeight] = useState("auto"); // Track the height of the textarea
   const textareaRef = useRef(null); // Reference to the textarea element
 
   // Handle input changes (title, content)
@@ -18,10 +17,10 @@ function CreateArea(props) {
       return { ...prevNote, [name]: value };
     });
 
-    // Adjust height based on content size
+    // Adjust height based on content size (ensure textarea expands properly)
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto"; // Reset the height before calculating
-      setHeight(`${textareaRef.current.scrollHeight}px`); // Set the new height based on content
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`; // Set the new height based on content
     }
   }
 
@@ -29,7 +28,9 @@ function CreateArea(props) {
   function submitNote(event) {
     props.onAdd(note);
     setNote({ title: "", content: "" });
-    setHeight("auto"); // Reset height for the next note
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto"; // Reset height after submission
+    }
     setExpanded(false); // Collapse the textarea after submission
     event.preventDefault();
   }
@@ -60,10 +61,9 @@ function CreateArea(props) {
           rows={1}
           ref={textareaRef} // Attach the reference to the textarea
           style={{
-            height,
-            transition: "height 0.3s ease-out", // Smooth transition when height changes
             overflow: "hidden",
             resize: "none",
+            transition: "height 0.3s ease-out", // Smooth transition when height changes
           }}
         />
 

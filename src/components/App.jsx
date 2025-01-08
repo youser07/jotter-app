@@ -14,11 +14,26 @@ function App() {
   const [editingNote, setEditingNote] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
+  
   function addNote(newNote) {
     setNotes((prevNotes) => {
-      return [...prevNotes, { ...newNote, id: Date.now() }];
+      // Add the note to the state immediately
+      const updatedNotes = [...prevNotes, { ...newNote, id: Date.now() }];
+      
+      // If the note is empty, delete it after 5 seconds
+      if (newNote.title === "" && newNote.content === "") {
+        setTimeout(() => {
+          setNotes((prevNotes) =>
+            prevNotes.filter((note) => note.id !== updatedNotes[updatedNotes.length - 1].id)
+          );
+        }, 2000); // Wait for 5 seconds before deleting
+      }
+  
+      return updatedNotes;
     });
   }
+  
+  
 
   function deleteNote(id) {
     setNotes((prevNotes) => {
