@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
@@ -6,39 +7,33 @@ import CreateArea from "./CreateArea";
 import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
 import ThemeToggle from "./ThemeToggle";
 import ModalEditNote from "./ModalEditNote"; // Import the new ModalEditNote component
+import LoginPage from "./LoginPage"; // Import the LoginPage component
 
 function App() {
   const [notes, setNotes] = useState([]);
   const [darkMode, setDarkMode] = useState(false);
-
   const [editingNote, setEditingNote] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
 
-  
   function addNote(newNote) {
     setNotes((prevNotes) => {
-      // Add the note to the state immediately
       const updatedNotes = [...prevNotes, { ...newNote, id: Date.now() }];
       
-      // If the note is empty, delete it after 5 seconds
       if (newNote.title === "" && newNote.content === "") {
         setTimeout(() => {
           setNotes((prevNotes) =>
             prevNotes.filter((note) => note.id !== updatedNotes[updatedNotes.length - 1].id)
           );
-        }, 2000); // Wait for 5 seconds before deleting
+        }, 2000);
       }
-  
+
       return updatedNotes;
     });
   }
-  
-  
 
   function deleteNote(id) {
-    setNotes((prevNotes) => {
-      return prevNotes.filter((note) => note.id !== id);
-    });
+    setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
   }
 
   function handleEdit(id) {
@@ -60,32 +55,43 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <div>
-        <Header />
-        <ThemeToggle darkMode={darkMode} toggleTheme={toggleTheme} />
-        <CreateArea onAdd={addNote} />
-        {notes.map((noteItem) => {
-          return (
-            <Note
-              key={noteItem.id}
-              id={noteItem.id}
-              title={noteItem.title}
-              content={noteItem.content}
-              onDelete={deleteNote}
-              onEdit={handleEdit}
-              darkMode={darkMode}
-            />
-          );
-        })}
-        <Footer />
-        {/* Use the ModalEditNote component here */}
-        <ModalEditNote
-          isEditModalOpen={isEditModalOpen}
-          setIsEditModalOpen={setIsEditModalOpen}
-          editingNote={editingNote}
-          setEditingNote={setEditingNote}
-        />
-      </div>
+      <Router>
+        <Routes>
+          {/* Main route that handles both login and the homepage */}
+          <Route
+            path="/"
+            element={
+              isLoggedIn ? (
+                <div>
+                  <Header />
+                  <ThemeToggle darkMode={darkMode} toggleTheme={toggleTheme} />
+                  <CreateArea onAdd={addNote} />
+                  {notes.map((noteItem) => (
+                    <Note
+                      key={noteItem.id}
+                      id={noteItem.id}
+                      title={noteItem.title}
+                      content={noteItem.content}
+                      onDelete={deleteNote}
+                      onEdit={handleEdit}
+                      darkMode={darkMode}
+                    />
+                  ))}
+                  <Footer />
+                  <ModalEditNote
+                    isEditModalOpen={isEditModalOpen}
+                    setIsEditModalOpen={setIsEditModalOpen}
+                    editingNote={editingNote}
+                    setEditingNote={setEditingNote}
+                  />
+                </div>
+              ) : (
+                <LoginPage setIsLoggedIn={setIsLoggedIn} />
+              )
+            }
+          />
+        </Routes>
+      </Router>
     </ThemeProvider>
   );
 }

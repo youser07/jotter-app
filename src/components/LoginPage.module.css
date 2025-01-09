@@ -1,0 +1,72 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f6f9;
+    border-radius: 8px;
+    padding: 40px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 0 auto;
+    margin-top: 50px; /* Ensure it has space from top */
+  }
+  
+  .title {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  .form {
+    width: 100%;
+  }
+  
+  .inputField {
+    margin: 10px 0;
+    background-color: #ffffff;
+    padding: 10px; /* Adjusted padding for better input field appearance */
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Added a light shadow for input fields */
+  }
+  
+  .submitButton {
+    margin-top: 20px;
+    background-color: #5c6bc0;
+    padding: 12px; /* Added padding for better button spacing */
+    border-radius: 4px;
+    width: 100%;
+    &:hover {
+      background-color: #3f51b5;
+    }
+  }
+  
+  /* For the guest login button */
+  .guestButton {
+    background-color: #b0bec5;
+    color: black;
+    margin-top: 20px;
+    padding: 12px; /* Added padding for better button spacing */
+    border-radius: 4px;
+    width: 100%;
+    &:hover {
+      background-color: #90a4ae;
+    }
+  }
+  
+  /* Fixes for Global Reset */
+  body {
+    padding: 0 16px; /* Keep padding to maintain margins */
+  }
+  
+  /* Fix for Form and Container Layout */
+  .form, .inputField, .submitButton, .guestButton {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .container {
+    margin-top: 50px;
+  }
+  
