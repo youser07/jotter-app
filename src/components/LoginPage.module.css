@@ -1,22 +1,20 @@
+/* Global reset and body styles already defined in global CSS */
+
+/* Styling for the Login Page */
 .loginPage .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #f4f6f9;
+  background-color: #F4FFC3; /* Lightest color from the palette */
   border-radius: 8px;
   padding: 40px;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
   max-width: 400px;
   margin: 0 auto;
-  margin-top: 50px; /* Ensure it has space from top */
-}
-
-.loginPage .title {
-  font-size: 2rem;
-  color: #333;
-  margin-bottom: 30px;
-  text-align: center;
+  margin-top: 50px; /* Ensures space from top */
+  /* Move form slightly to the left */
+  margin-left: 10%;
 }
 
 .loginPage .form {
@@ -26,41 +24,39 @@
 .loginPage .inputField {
   margin: 10px 0;
   background-color: #ffffff;
-  padding: 10px; /* Adjusted padding for better input field appearance */
+  padding: 8px; /* Reduced padding for a sleeker input */
   border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Added a light shadow for input fields */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow for input fields */
 }
 
 .loginPage .submitButton {
-  margin-top: 20px;
-  background-color: #5c6bc0;
-  padding: 12px; /* Added padding for better button spacing */
+  margin-top: 15px;
+  background-color: #5D8736; /* Darkest color for login button */
+  padding: 10px 15px; /* Reduced padding for smaller button */
   border-radius: 4px;
   width: 100%;
+  color: #fff; /* Ensure text is visible */
+  font-size: 1em;
   &:hover {
-    background-color: #3f51b5;
+    background-color: #4C7030; /* Slightly darker for hover */
   }
 }
 
 /* For the guest login button */
 .loginPage .guestButton {
-  background-color: #b0bec5;
-  color: black;
-  margin-top: 20px;
-  padding: 12px; /* Added padding for better button spacing */
+  background-color: #809D3C; /* Second darkest color */
+  color: white;
+  margin-top: 15px;
+  padding: 10px 15px; /* Reduced padding for smaller button */
   border-radius: 4px;
   width: 100%;
+  font-size: 1em;
   &:hover {
-    background-color: #90a4ae;
+    background-color: #6F8432; /* Slightly darker for hover */
   }
 }
 
-/* Fixes for Global Reset */
-body {
-  padding: 0 16px; /* Keep padding to maintain margins */
-}
-
-/* Fix for Form and Container Layout */
+/* Ensure input fields and buttons stretch to full width */
 .loginPage .form,
 .loginPage .inputField,
 .loginPage .submitButton,
@@ -69,6 +65,7 @@ body {
   box-sizing: border-box;
 }
 
-.loginPage .container {
-  margin-top: 50px;
+/* Remove the title */
+.loginPage .title {
+  display: none; /* Removed the title */
 }
